@@ -7,4 +7,4 @@ ContBancar::ContBancar(std::string nume, std::string prenume, std::string IBAN)
 	this->IBAN = IBAN;
 	sold = 0;
 	eTipCont = TIP_CONT::RON;
-}
+} 
