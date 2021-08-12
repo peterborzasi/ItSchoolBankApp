@@ -20,7 +20,7 @@ public:
 	
 	//getters
 	inline std::string getNume() {return nume;}
-	inline std::string getPrenume() { return prenume; }
+	inline std::string getPrenume() {return prenume;}
 	inline int getBalance() { return sold; }
 	inline std::string getIBAN() { return IBAN; }
 	

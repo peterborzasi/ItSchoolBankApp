@@ -23,7 +23,9 @@ void Bank::adaugareCont()
 	m_ConturiBancare.push_back(cont);
 	std::cout << "Cont adaugat cu succes.\n";
 	std::cout << "1 -> Creare cont nou\n";
-	std::cout << "2 -> Meniu principal\n";
+	std::cout << "2 -> Vizualizare conturi\n";
+	std::cout << "3 -> Modificare conturi\n";
+	std::cout << "9 -> Meniu principal\n";
 	std::cout << "Alegeti o optiune: ";
 	char optiune;
 	std::cin >> optiune;
@@ -31,6 +33,13 @@ void Bank::adaugareCont()
 	{
 	case '1':
 		adaugareCont();
+		break;
+	case '2':
+		vizualizareConturi();
+		break;
+	case '3':
+		modificareCont();
+		break;
 	default:
 		break;
 	}
@@ -49,10 +58,11 @@ void Bank::vizualizareConturi()
 	std::cout << "Nr. conturi bancare active: " << m_ConturiBancare.size() << std::endl;
 	for (int i = 0; i < m_ConturiBancare.size(); i++)
 	{
-		std::cout << "Cont " << i+1 << ": " << m_ConturiBancare[i]->getNume() << " - IBAN: " << m_ConturiBancare[i]->getIBAN() << std::endl;
+		std::cout << "Cont " << i+1 << ": " << m_ConturiBancare[i]->getNume() << " " << m_ConturiBancare[i]->getPrenume() << " - IBAN: " << m_ConturiBancare[i]->getIBAN() << std::endl;
 	}
 	std::cout << "1 -> Creare cont nou\n";
-	std::cout << "2 -> Meniu principal\n";
+	std::cout << "2 -> Modificare cont existent\n";
+	std::cout << "9 -> Meniu principal\n";
 	std::cout << "Alegeti o optiune: ";
 	char optiune;
 	std::cin >> optiune;
@@ -60,6 +70,12 @@ void Bank::vizualizareConturi()
 	{
 	case '1':
 		adaugareCont();
+		break;
+	case '2':
+		modificareCont();
+		break;
+	case '9':
+		break;
 	default:
 		break;
 	}
@@ -77,7 +93,7 @@ void Bank::modificareCont()
 {
 	system("CLS");
 	//intrebati operatorul care cont doreste sa il modifice
-	std::cout << "Intoduceti numele si prenumele contului\n";
+	std::cout << "Ce cont doriti sa modificati? Introduceti datele:\n";
 	std::cout << "Introduceti numele: ";
 	std::string nume;
 	std::cin >> nume;
@@ -88,6 +104,7 @@ void Bank::modificareCont()
 	ContBancar* temp = nullptr;
 
 	//cautare cont
+	
 	//int foundIndex = 0;
 	//for (int i = 0; i < m_ConturiBancare.size(); i++)
 	//{
@@ -106,51 +123,96 @@ void Bank::modificareCont()
 		if (nume == (*it)->getNume() && prenume == (*it)->getPrenume())
 		{
 			temp = *it;
+			std::cout << "Cont gasit: " << temp->getNume() << " " << temp->getPrenume() << std::endl;
 			break;
 		}
 	}
 
-	std::cout << "Numele contului cautat: " << temp->getNume() << std::endl;
+
 
 
 	//cont negasit
-//	if (temp == nullptr)
-//	{
-//		std::cout << "Contul nu a fost gasit\n";
-//		std::cout << "1 -> Intoarcere la meniu principal\n";
-//		std::cout << "2 -> Creati un cont\n";
-//		std::cout << "3 -> Cautare noua\n";
-//		char optiune;
-//		std::cin >> optiune;
-//		switch (optiune)
-//		{
-//		case '1':
-//			std::cout << "Meniu principal...";
-//			break;
-//		case '2':
-//			adaugareCont();
-//			break;
-//		case '3':
-//			modificareCont();
-//			break;
-//		default:
-//			break;
-//		}
-//	}
-//	else
-//	{
-//		std::cout << "Ce modificari vreti sa faceti?\n";
-//		std::cout << "1 - Modificare nume\n";
-//
-//		m_ConturiBancare.erase(it);
-//		/*
-//		1 - modificare nume
-//		2 - modificare prenume
-//		3 - modificati etc
-//		6 - stergere cont
-//		*/
-//	}
-//	
-//}
-
+	if (temp == nullptr)
+	{
+		std::cout << "Contul nu a fost gasit\n";
+		std::cout << "1 -> Vizualizare conturi\n";
+		std::cout << "2 -> Creati un cont\n";
+		std::cout << "3 -> Cautare noua\n";
+		std::cout << "9 -> Meniu principal\n";
+		std::cout << "Selectati o optiune: ";
+		char optiune;
+		std::cin >> optiune;
+		switch (optiune)
+		{
+		case '1':
+			vizualizareConturi();
+			break;
+		case '2':
+			adaugareCont();
+			break;
+		case '3':
+			modificareCont();
+			break;
+		default:
+			break;
+		}
+	}
+	else
+		//cont gasit
+	{
+		std::cout << "Ce modificari vreti sa faceti?\n";
+		std::cout << "1 - Modificare nume\n";
+		std::cout << "2 - Modificare prenume\n";
+		std::cout << "6 - Stergere cont (*nu poate fi revocat)\n";
+		std::cout << "8 - Cautare noua\n";
+		std::cout << "9 - Inapoi la meniul principal\n";
+		std::cout << "Selectati o optiune: ";
+		char optiune;
+		std::cin >> optiune;
+		switch (optiune)
+		{
+		case '1':
+			{std::string schimbareNume;
+			std::cout << "Introduceti NUME nou: ";
+			std::cin >> schimbareNume;
+			temp->setNume(schimbareNume);
+			break;
+			}
+		case '2':
+			{std::string schimbarePrenume;
+			std::cout << "Introduceti PRENUME nou: ";
+			std::cin >> schimbarePrenume;
+			temp->setNume(schimbarePrenume);
+			break;
+			}
+		case '6':
+			m_ConturiBancare.erase(it);
+			break;
+		case '8':
+			modificareCont();
+			break;
+		case '9':
+			std::cout << "Going back...";
+			break;
+		default:
+			break;
+		}
+		
+		
+		/*
+		1 - modificare nume
+		2 - modificare prenume
+		3 - modificati etc
+		6 - stergere cont
+		*/
+	}
+	
 }
+
+//void schimbareNume()
+//{
+//	std::string schimbareNume;
+//	std::cout << "Introduceti nume nou: ";
+//	std::cin >> schimbareNume;
+//	temp->setNume(schimbareNume);
+//}
