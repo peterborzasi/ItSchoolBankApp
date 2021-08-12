@@ -1,52 +1,64 @@
 #include <iostream>
 
+#include "passwordCheck.h"
 #include "Bank.h"
+
+
 
 int main()
 {
-    //instantam o banca
-    Bank* itSchoolBank = new Bank();
-    bool isRunning = true;
-
-    //meniu principal
-    do
+    //login: verificam username si parola
+    //passwordCheck();
+    if (!passwordCheck()){
+        std::cout << "Login failed.\n";
+    }
+    else
     {
-        system("CLS");
-        std::cout << "Meniu principal\n";
-        std::cout << "1 -> Adaugare cont nou\n";
-        std::cout << "2 -> Vizualizare conturi\n";
-        std::cout << "3 -> Modificare conturi\n";
-        std::cout << "9 -> Exit\n";
-        std::cout << "Alegeti o optiune: ";
-        char optiune;
-        std::cin >> optiune;
 
-        switch (optiune)
+        //instantam o banca
+        Bank* itSchoolBank = new Bank();
+        bool isRunning = true;
+
+        //meniu principal
+        do
         {
-        case '1':
             system("CLS");
-            itSchoolBank->adaugareCont();
-            break;
-        case '2':
-            system("CLS");
-            itSchoolBank->vizualizareConturi();
-            break;
-        case '3':
-            system("CLS");
-            itSchoolBank->modificareCont();
-            break;
-        case '9':
-            std::cout << "La revedere!\n";
-            isRunning = false;
-            break;
-        default:
-            system("CLS");
-            std::cout << "Optiune invalida\n";
-            break;
-        }
-    } while (isRunning);
+            std::cout << "Meniu principal\n";
+            std::cout << "1 -> Adaugare cont nou\n";
+            std::cout << "2 -> Vizualizare conturi\n";
+            std::cout << "3 -> Modificare conturi\n";
+            std::cout << "9 -> Exit\n";
+            std::cout << "Alegeti o optiune: ";
+            char optiune;
+            std::cin >> optiune;
 
-   delete itSchoolBank;
+            switch (optiune)
+            {
+            case '1':
+                system("CLS");
+                itSchoolBank->adaugareCont();
+                break;
+            case '2':
+                system("CLS");
+                itSchoolBank->vizualizareConturi();
+                break;
+            case '3':
+                system("CLS");
+                itSchoolBank->modificareCont();
+                break;
+            case '9':
+                std::cout << "La revedere!\n";
+                isRunning = false;
+                break;
+            default:
+                system("CLS");
+                std::cout << "Optiune invalida\n";
+                break;
+            }
+        } while (isRunning);
+
+        delete itSchoolBank;
+    }
    return 0;
 }
 

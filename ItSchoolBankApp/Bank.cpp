@@ -88,16 +88,16 @@ void Bank::modificareCont()
 	ContBancar* temp = nullptr;
 
 	//cautare cont
-	int foundIndex = 0;
-	for (int i = 0; i < m_ConturiBancare.size(); i++)
-	{
-		if (nume == m_ConturiBancare[i]->getNume() && prenume == m_ConturiBancare[i]->getPrenume())
-		{
-			temp = m_ConturiBancare[i];
-			foundIndex = i;
-			break;
-		}
-	}
+	//int foundIndex = 0;
+	//for (int i = 0; i < m_ConturiBancare.size(); i++)
+	//{
+	//	if (nume == m_ConturiBancare[i]->getNume() && prenume == m_ConturiBancare[i]->getPrenume())
+	//	{
+	//		temp = m_ConturiBancare[i];
+	//		foundIndex = i;
+	//		break;
+	//	}
+	//}
 
 	std::vector<ContBancar*>::iterator it;
 
