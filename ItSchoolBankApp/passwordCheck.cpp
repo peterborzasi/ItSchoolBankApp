@@ -65,7 +65,8 @@ bool passwordCheck()
             if (incercariRamase == 0)
             {
                 std::cout << "Nu mai aveti incercari. Contul este blocat. Sunati la 112." << std::endl;
-                break;
+                loginSuccesful = 0;
+                return loginSuccesful;
             }
             else
             {
